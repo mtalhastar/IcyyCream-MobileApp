@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "362141200844",
+    "project_id": "ice-cream-7deb3",
+    "storage_bucket": "ice-cream-7deb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362141200844:android:5902be1d21e4285778ad69",
+        "android_client_info": {
+          "package_name": "com.example.iccycream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362141200844-3r3e0q511u236ll9rqv538s7j2hg1gem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iccycream",
+            "certificate_hash": "5b5a3ced00eba033c25ec044d5a7ccc32fe114f0"
+          }
+        },
+        {
+          "client_id": "362141200844-a84ups8a0qekqvfmee86h28vpqasi3qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB8WDxKYhJEupglIvYoCfTuh-VvPQ6mE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362141200844-a84ups8a0qekqvfmee86h28vpqasi3qo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "362141200844-48ddm4nmpft366ai65lb1hrukfq9gsqb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.iccycream.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
