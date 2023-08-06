@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/screens/SignUpPage.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:iccycream/controller/authController.dart';
 
 class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen({super.key});
@@ -29,11 +26,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   }
 
   bool validate() {
-    if (!GetUtils.isEmail(_Emailcontroller.value.text)) {
+    if (_Emailcontroller.value.text.isEmpty) {
       return false;
     }
     if (_Passwordcontroller.value.text.isEmpty) {
-      print(_Passwordcontroller.value.text);
       return false;
     }
     return true;
@@ -41,36 +37,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
   void Signingin() async {
     if (validate() == true) {
-      try {
-        final usercredentials = await firebase.signInWithEmailAndPassword(
-            email: _Emailcontroller.value.text,
-            password: _Passwordcontroller.value.text);
-      } on FirebaseAuthException catch (error) {
-        if (error.code == 'email-already-in-use') {}
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(error.message ?? 'Authentication Failed')));
-      }
+      AuthController.instance.login(_Emailcontroller.value.text, _Passwordcontroller.value.text);
     } else {
-      Get.snackbar(
-        "Invalid Input: ",
-        "Your Input is incorrect",
-        icon: const Icon(Icons.person, color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
-
-  void _signInWithGoogle() async {
-    try {
-      GoogleSignInAccount? googleuser = await GoogleSignIn().signIn();
-      GoogleSignInAuthentication googleAuth = await googleuser!.authentication;
-
-      AuthCredential credential = await GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e) {
-      print(e);
+      return;
     }
   }
 
@@ -225,7 +194,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                             ),
                           ),
                           child: InkWell(
-                            onTap: _signInWithGoogle,
+                            onTap:  AuthController.instance.signInWithGoogle,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

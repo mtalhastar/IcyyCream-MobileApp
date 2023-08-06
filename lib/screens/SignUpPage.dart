@@ -4,9 +4,8 @@ import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/screens/WelcomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:iccycream/controller/authController.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -48,40 +47,14 @@ class _SignUpState extends State<SignUp> {
 
   void SignUp() async {
     if (validate() == true) {
-      try {
-        final usercredential = await firebase.createUserWithEmailAndPassword(
-            email: _Emailcontroller.value.text,
-            password: _Passwordcontroller.value.text);
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(usercredential.user!.uid)
-            .set({
-          'username': _Usercontroller.value.text,
-          'email': _Emailcontroller.value.text,
-          'uid': usercredential.user!.uid
-        });
-      } on FirebaseAuthException catch (error) {
-        if (error.code == 'email-already-in-use') {}
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(error.message ?? 'Authentication Failed')));
-      }
-    } else {
+        AuthController.instance.signUp(
+            _Emailcontroller.value.text, _Passwordcontroller.value.text);
+        }
+       else {
       return;
     }
   }
-
-  void _signInWithGoogle() async {
-    try {
-      GoogleSignInAccount? googleuser = await GoogleSignIn().signIn();
-      GoogleSignInAuthentication googleAuth = await googleuser!.authentication;
-      AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e) {
-      print(e);
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +229,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         const SizedBox(height: 30),
                         InkWell(
-                          onTap: _signInWithGoogle,
+                          onTap: AuthController.instance.signInWithGoogle,
                           child: Container(
                             height: 50,
                             decoration: ShapeDecoration(
