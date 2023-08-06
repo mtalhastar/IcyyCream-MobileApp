@@ -20,7 +20,7 @@ class _CartScreenState extends State<CartScreen> {
           automaticallyImplyLeading: false,
           title: const Text(
             'Cart',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 18,color: Colors.black),
           ),
           backgroundColor: Colors.white,
           leading: IconButton(
@@ -28,7 +28,7 @@ class _CartScreenState extends State<CartScreen> {
                 Get.back();
                 c.index.value = 1;
               },
-              icon: const Icon(Icons.arrow_back_ios_new_outlined))),
+              icon: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black))),
       body: Container(
         width: double.infinity,
         color: Colors.white,

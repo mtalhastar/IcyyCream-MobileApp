@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iccycream/screens/AuthPage.dart';
 import 'package:iccycream/screens/WelcomePage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:iccycream/screens/getStarted.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -20,9 +21,9 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) {
     if (user == null) {
-      Get.offAll(const AuthenticationScreen());
+      Get.offAll(const AuthenticationScreen(),transition: Transition.fadeIn);
     } else {
-      Get.offAll(const WelcomeScreen());
+      Get.offAll(const WelcomeScreen(),transition: Transition.fadeIn);
     }
   }
 
@@ -32,7 +33,7 @@ class AuthController extends GetxController {
           email: email, password: password);
       _firebaseUser.value != null
           ? Get.offAll(const WelcomeScreen())
-          : Get.to(const AuthenticationScreen());
+          : Get.to(const StartScreen());
     } catch (e) {
       Get.snackbar("Error creating account", e.toString(),
           snackPosition: SnackPosition.BOTTOM);
@@ -68,6 +69,14 @@ class AuthController extends GetxController {
       AuthCredential credential = await GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
       await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void signOutWithGoogle() async {
+    try {
+      await GoogleSignIn().signOut();
     } catch (e) {
       print(e);
     }

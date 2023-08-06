@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:iccycream/controller/authController.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -21,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     Get.put(NavController());
     return Scaffold(
-        body: Container(
+        body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
             child: Column(
@@ -43,8 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         child: Column(
                           children: [
                             Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 20),
+                              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                               width: double.maxFinite,
                               child: Row(children: [
                                 Text(
@@ -65,20 +65,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                         letterSpacing: 2),
                                   ),
                                 ),
-                                const Spacer(),
-                                InkWell(
-                                    onTap: () async {
-                                      print('I am clicked');
-                                     await FirebaseAuth.instance.signOut();
-                                     await GoogleSignIn().signOut;
-                                    
-                                    
-                                    },
-                                    child: const Center(
-                                        child: Icon(
-                                      Icons.exit_to_app,
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                    )))
                               ]),
                             ),
                             const SizedBox(
@@ -105,6 +91,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           'assets/images/pppn.png',
                           width: 150,
                         )),
+
+                         Positioned(
+                          right: 10,
+                          top: 40,
+                           child: InkWell(
+                                                 onTap: () {
+                            AuthController.instance.signOut();
+                            AuthController.instance.signOutWithGoogle();
+                                                 },
+                                                 child: const Icon(
+                            Icons.exit_to_app,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                                                 )),
+                         ),
                   ],
                 ),
                 Container(
@@ -126,7 +126,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ],
                   ),
                   child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
                         width: 20,
@@ -151,6 +150,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   height: 30,
                 ),
                 Container(
+                  width: double.maxFinite,
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(40))),
                     margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),

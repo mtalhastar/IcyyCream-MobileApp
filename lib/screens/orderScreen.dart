@@ -22,7 +22,8 @@ class _OrderScreenState extends State<OrderScreen> {
           automaticallyImplyLeading: false,
           title: const Text(
             'Orders',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 18,color: Colors.black),
+            
           ),
           backgroundColor: Colors.white,
           leading: IconButton(
@@ -30,7 +31,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 Get.back();
                 c.index.value = 1;
               },
-              icon: const Icon(Icons.arrow_back_ios_new_outlined))),
+              icon: const Icon(Icons.arrow_back_ios_new_outlined ,color: Colors.black,))),
       body: Container(
         width: double.infinity,
         color: Colors.white,
