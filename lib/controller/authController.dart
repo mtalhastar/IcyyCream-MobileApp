@@ -65,7 +65,6 @@ class AuthController extends GetxController {
     try {
       GoogleSignInAccount? googleuser = await GoogleSignIn().signIn();
       GoogleSignInAuthentication googleAuth = await googleuser!.authentication;
-
       AuthCredential credential = await GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
       await FirebaseAuth.instance.signInWithCredential(credential);
@@ -73,6 +72,7 @@ class AuthController extends GetxController {
       print(e);
     }
   }
+
 
   void signOutWithGoogle() async {
     try {

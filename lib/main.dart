@@ -7,23 +7,29 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iccycream/firebase_options.dart';
 import 'package:iccycream/controller/authController.dart';
+import 'package:iccycream/controller/iceCreamController.dart';
 import 'package:iccycream/screens/getStarted.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => Get.put(AuthController()));
-  runApp(MyApp());
+      .then((value) =>  initializingControllers());
+  runApp(const MyApp());
+}
+
+void initializingControllers() {
+  Get.put(AuthController());
+  Get.put(IceCreamController());
+
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
   // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
-
-    return  const GetMaterialApp(
-      home: StartScreen());
+    return const GetMaterialApp(home: StartScreen());
   }
 }
