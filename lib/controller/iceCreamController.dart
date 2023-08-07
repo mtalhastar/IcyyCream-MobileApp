@@ -4,7 +4,6 @@ import 'package:iccycream/models/icecream.dart';
 import 'package:iccycream/models/icecream.dart';
 
 class IceCreamController extends GetxController {
- 
   static IceCreamController instance = Get.find();
   RxList<IceCream> iceCreamsList = RxList<IceCream>([]);
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -18,10 +17,8 @@ class IceCreamController extends GetxController {
   }
 
   Stream<List<IceCream>> GetIceList() {
-    Stream<QuerySnapshot> stream =
-        collectionReference.snapshots();
-        
-        return stream.map((qShot) => qShot.docs
+    Stream<QuerySnapshot> stream = collectionReference.snapshots();
+    return stream.map((qShot) => qShot.docs
         .map((doc) => IceCream(
             id: doc.id,
             name: doc['name'],

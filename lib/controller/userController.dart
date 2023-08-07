@@ -1,11 +1,9 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserController extends GetxController {
+class UserController {
  
-  static UserController instance = Get.find();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-
   void addUserToCollection(String uid, String username, String email) async {
     try {
       CollectionReference usersCollection = firestore.collection('users');
@@ -14,12 +12,12 @@ class UserController extends GetxController {
         'username': username,
         'email': email,
       });
-
       print('User added to Firestore successfully');
     } catch (error) {
       print('Error adding user to Firestore: $error');
     }
   }
+
   void removeUserByUid(String uidToRemove) async {
     try {
       CollectionReference usersCollection = firestore.collection('users');
@@ -32,5 +30,5 @@ class UserController extends GetxController {
       print('Error removing user(s) from Firestore: $error');
     }
   }
-
+  
 }

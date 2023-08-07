@@ -4,11 +4,14 @@ import 'package:iccycream/screens/AuthPage.dart';
 import 'package:iccycream/screens/WelcomePage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iccycream/screens/getStarted.dart';
+import 'package:iccycream/models/user.dart';
+import 'package:iccycream/controller/userController.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   FirebaseAuth _auth = FirebaseAuth.instance;
   late Rx<User?> _firebaseUser;
+  Users users = const Users();
 
   @override
   void onReady() {
@@ -21,19 +24,32 @@ class AuthController extends GetxController {
 
   _initialScreen(User? user) {
     if (user == null) {
-      Get.offAll(const AuthenticationScreen(),transition: Transition.fadeIn);
+      Get.offAll(const AuthenticationScreen(), transition: Transition.fadeIn);
     } else {
-      Get.offAll(const WelcomeScreen(),transition: Transition.fadeIn);
+      users = Users(
+          uid: user.uid, username: user.displayName, email: user.displayName);
+      print('Username is');
+      print(user.displayName);
+      Get.offAll(
+          WelcomeScreen(
+            user: users,
+          ),
+          transition: Transition.fadeIn);
     }
   }
 
-  void signUp(String email, String password) async {
+  void signUp(String username, String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       _firebaseUser.value != null
-          ? Get.offAll(const WelcomeScreen())
+          ? Get.offAll(WelcomeScreen(
+              user: Users(username: username),
+            ))
           : Get.to(const StartScreen());
+      String uid = _auth.currentUser!.uid;
+      users = Users(uid: uid, username: username, email: email);
+      UserController().addUserToCollection(uid, username, email);
     } catch (e) {
       Get.snackbar("Error creating account", e.toString(),
           snackPosition: SnackPosition.BOTTOM);
@@ -67,12 +83,17 @@ class AuthController extends GetxController {
       GoogleSignInAuthentication googleAuth = await googleuser!.authentication;
       AuthCredential credential = await GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      await _auth.signInWithCredential(credential);
+
+      String uid = _auth.currentUser!.uid;
+      String? username = _auth.currentUser!.displayName;
+      String? email = _auth.currentUser!.email;
+      users = Users(uid: uid, username: username!, email: email!);
+      UserController().addUserToCollection(uid, username, email);
     } catch (e) {
       print(e);
     }
   }
-
 
   void signOutWithGoogle() async {
     try {

@@ -20,8 +20,6 @@ void main() async {
 
 void initializingControllers() {
   Get.put(AuthController());
-  Get.put(IceCreamController());
-
 }
 
 class MyApp extends StatelessWidget {

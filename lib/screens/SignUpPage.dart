@@ -47,10 +47,9 @@ class _SignUpState extends State<SignUp> {
 
   void SignUp() async {
     if (validate() == true) {
-        AuthController.instance.signUp(
-            _Emailcontroller.value.text, _Passwordcontroller.value.text);
-        }
-       else {
+        AuthController.instance.signUp(_Usercontroller.value.text,_Emailcontroller.value.text, _Passwordcontroller.value.text);
+    }
+    else {
       return;
     }
   }
