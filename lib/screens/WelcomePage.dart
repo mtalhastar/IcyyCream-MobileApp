@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:iccycream/controller/iceCreamController.dart';
 import 'package:iccycream/widgets/card.dart';
 import 'package:iccycream/widgets/categories.dart';
 import 'package:iccycream/widgets/bottomnavbar.dart';
@@ -174,14 +175,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             mainAxisSpacing: 20,
                             mainAxisExtent: 240,
                             crossAxisSpacing: 20),
-                    itemCount:
-                        3, // Replace this with the actual number of grid items you want
+                    itemCount:IceCreamController.instance.iceCreamsList.length, // Replace this with the actual number of grid items you want
                     itemBuilder: (context, index) {
-                      return const CardWidget(
-                        name: 'Zombie',
-                        description: 'with Vanilla',
-                        price: '20',
-                        imageUrl: 'assets/images/zombie2.png',
+                      return CardWidget(
+                        name: IceCreamController.instance.iceCreamsList[index].name,
+                        description: IceCreamController.instance.iceCreamsList[index].shortDescription,
+                        longDescription:IceCreamController.instance.iceCreamsList[index].longDescription,
+                        price: IceCreamController.instance.iceCreamsList[index].price,
+                        imageUrl: IceCreamController
+                            .instance.iceCreamsList[index].imageUrl,
                       );
                     },
                   ),

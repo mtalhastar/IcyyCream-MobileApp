@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:iccycream/controller/iceCreamController.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
@@ -9,6 +10,14 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
+  List<String> newicecreamlist=[];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    newicecreamlist = IceCreamController.instance.GetIceCreamCategories();
+  }
+
   int index = 1;
   @override
   Widget build(BuildContext context) {
@@ -48,87 +57,39 @@ class _CategoryListState extends State<CategoryList> {
           const SizedBox(
             width: 10,
           ),
-          InkWell(
-              child: Container(
-                alignment: Alignment.center,
-                width: 101,
-                height: 30,
-                decoration: ShapeDecoration(
-                  color: index == 2 ? Colors.black : Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
+          for (var i = 0; i < newicecreamlist.length;i++)
+            Row(
+              children: [
+                InkWell(
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 101,
+                      height: 30,
+                      decoration: ShapeDecoration(
+                        color: index == 2+i ? Colors.black : Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: Text(
+                        newicecreamlist[i],
+                        style: TextStyle(
+                          color: index == 2+i ? Colors.white : Colors.black,
+                          fontSize: 14,
+                          fontFamily: 'Jaldi',
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 0.70,
+                        ),
+                      ),
+                    ),
+                    onTap: () => setState(() {
+                          index = 2+i;
+                        })),
+                const SizedBox(
+                  width: 10,
                 ),
-                child: Text(
-                  'strawberry',
-                  style: TextStyle(
-                    color: index == 2 ? Colors.white : Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Jaldi',
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.70,
-                  ),
-                ),
-              ),
-              onTap: () => setState(() {
-                    index = 2;
-                  })),
-          const SizedBox(
-            width: 10,
-          ),
-          InkWell(
-              child: Container(
-                alignment: Alignment.center,
-                width: 101,
-                height: 30,
-                decoration: ShapeDecoration(
-                  color: index == 3 ? Colors.black : Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                child: Text(
-                  'banana',
-                  style: TextStyle(
-                    color: index == 3 ? Colors.white : Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Jaldi',
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.70,
-                  ),
-                ),
-              ),
-              onTap: () => setState(() {
-                    index = 3;
-                  })),
-          const SizedBox(
-            width: 10,
-          ),
-          InkWell(
-              child: Container(
-                alignment: Alignment.center,
-                width: 101,
-                height: 30,
-                decoration: ShapeDecoration(
-                  color: index == 4 ? Colors.black : Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                child: Text(
-                  'vanilla',
-                  style: TextStyle(
-                    color: index == 4 ? Colors.white : Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'Jaldi',
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.70,
-                  ),
-                ),
-              ),
-              onTap: () => setState(() {
-                    index = 4;
-                  })),
+              ],
+            ),
         ],
       ),
     );

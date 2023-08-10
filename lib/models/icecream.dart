@@ -11,7 +11,7 @@ class IceCream {
   final String name;
   final String shortDescription;
   final String longDescription;
-  final double price;
+  final String price;
   final String category;
   final String imageUrl;
 }

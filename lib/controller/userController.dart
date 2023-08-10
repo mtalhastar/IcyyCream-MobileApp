@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserController {
- 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   void addUserToCollection(String uid, String username, String email) async {
     try {
       CollectionReference usersCollection = firestore.collection('users');
@@ -21,7 +21,8 @@ class UserController {
   void removeUserByUid(String uidToRemove) async {
     try {
       CollectionReference usersCollection = firestore.collection('users');
-      QuerySnapshot snapshot = await usersCollection.where('uid', isEqualTo: uidToRemove).get();
+      QuerySnapshot snapshot =
+          await usersCollection.where('uid', isEqualTo: uidToRemove).get();
       for (QueryDocumentSnapshot doc in snapshot.docs) {
         await doc.reference.delete();
       }
@@ -30,5 +31,4 @@ class UserController {
       print('Error removing user(s) from Firestore: $error');
     }
   }
-  
 }

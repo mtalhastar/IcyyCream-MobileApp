@@ -10,10 +10,10 @@ class IceCreamController extends GetxController {
   late CollectionReference collectionReference;
 
   @override
-  void onReady() {
+  void onInit() {
     collectionReference = firestore.collection('icecreams');
     iceCreamsList.bindStream(GetIceList());
-    super.onReady();
+    super.onInit();
   }
 
   Stream<List<IceCream>> GetIceList() {
@@ -28,6 +28,12 @@ class IceCreamController extends GetxController {
             imageUrl: doc['imageUrl'],
             category: doc['category']))
         .toList());
+  }
+
+  List<String> GetIceCreamCategories() {
+    final list =iceCreamsList.map((element) => element.category.toString()).toList();
+    print(list);
+    return list;
   }
 
   void addIceCream(String uid, String name, String description, String price,

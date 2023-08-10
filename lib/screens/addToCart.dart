@@ -4,8 +4,17 @@ import 'package:iccycream/controller/bottomNavController.dart';
 
 class AddToCartScreen extends StatelessWidget {
   NavController c = Get.find();
-  AddToCartScreen({super.key, required this.imageUrl});
+  AddToCartScreen(
+      {super.key,
+      required this.imageUrl,
+      required this.price,
+      required this.longDescription,
+      required this.shortDescription});
+
   final String imageUrl;
+  final String price;
+  final String longDescription;
+  final String shortDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +22,7 @@ class AddToCartScreen extends StatelessWidget {
         body: Stack(
       children: [
         Container(width: double.infinity, color: Colors.white),
-        Positioned(top: 0, left: 0, right: 0, child: Image.asset(imageUrl)),
+        Positioned(top: 0, left: 0, right: 0, child: Image.network(imageUrl)),
         Positioned(
           bottom: 0,
           left: 0,
@@ -28,12 +37,12 @@ class AddToCartScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 361,
                     height: 66,
                     child: Text(
-                      'IceCream - Zombie',
-                      style: TextStyle(
+                      shortDescription,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                         fontFamily: 'Jaldi',
@@ -42,12 +51,12 @@ class AddToCartScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                   SizedBox(
                       width: 361,
                       height: 66,
                       child: Text(
-                        '20\$',
-                        style: TextStyle(
+                        '$price\$',
+                        style: const TextStyle(
                           color: Color(0xFFEEC605),
                           fontSize: 40,
                           fontFamily: 'Jaldi',
@@ -58,13 +67,11 @@ class AddToCartScreen extends StatelessWidget {
                   Container(
                     width: double.maxFinite,
                     height: 150,
-                    child: const SingleChildScrollView(
+                    child:  SingleChildScrollView(
                       child: Text(
-                        'At first glance, the appearance is deceivingly innocuous—a scoop of ice cream, seemingly like any other, nestled in a frosty, pitch-black waffle cone.'
-                        'But beware for it'
-                        's not just any frozen treat that beckons to you its a sinister concoction that defies the boundaries of the culinary realm.',
+                         longDescription,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(
+                        style:const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontFamily: 'Jaldi',

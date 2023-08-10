@@ -8,12 +8,14 @@ class CardWidget extends StatefulWidget {
       required this.name,
       required this.description,
       required this.price,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.longDescription});
 
   final String name;
   final String imageUrl;
   final String description;
   final String price;
+  final String longDescription;
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -37,20 +39,20 @@ class _CardWidgetState extends State<CardWidget> {
               top: 5,
               child: InkWell(
                  onTap: () {
-                  Get.to(AddToCartScreen(imageUrl: widget.imageUrl),
+                  Get.to(AddToCartScreen(imageUrl: widget.imageUrl,shortDescription: widget.name,price: widget.price,longDescription: widget.longDescription,),
                       transition: Transition.downToUp,
                       duration: const Duration(seconds: 1));
                 },
-                child: Image.asset(
+                child: Image.network(
                   widget.imageUrl,
-                  height: 150,
+                  height: 100,
                   width: 132,
                 ),
               )),
         Positioned(
           left: 5,
           right: 5,
-          bottom: 55,
+          bottom: 70,
           child: Text(
             widget.name,
             textAlign: TextAlign.left,
@@ -66,7 +68,7 @@ class _CardWidgetState extends State<CardWidget> {
         Positioned(
           left: 5,
           right: 5,
-          bottom: 35,
+          bottom: 50,
           child: Text(
             widget.description,
             textAlign: TextAlign.left,

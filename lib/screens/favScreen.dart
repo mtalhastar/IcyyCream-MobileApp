@@ -42,7 +42,7 @@ class _FavScreenState extends State<FavScreen> {
               padding: EdgeInsets.all(5),
               child: InkWell(
                 onTap: () {
-                  Get.to(AddToCartScreen(imageUrl: 'assets/images/zombie2.png' ),
+                  Get.to(AddToCartScreen(imageUrl: 'assets/images/zombie2.png',price: '',longDescription: '',shortDescription: '', ),
                       transition: Transition.downToUp,
                       duration: const Duration(seconds: 1));
                 },
