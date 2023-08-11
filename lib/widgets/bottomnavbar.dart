@@ -47,8 +47,7 @@ class BottomNavi extends StatelessWidget {
               child: InkWell(
                   onTap: () {
                     controller.setIndex((2));
-
-                    Get.to(CartScreen());
+                    Get.to(const CartScreen());
                   },
                   child: Obx(
                     () => Icon(

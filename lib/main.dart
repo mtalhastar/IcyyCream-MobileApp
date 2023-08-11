@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:iccycream/firebase_options.dart';
 import 'package:iccycream/controller/authController.dart';
 import 'package:iccycream/controller/iceCreamController.dart';
+import 'package:iccycream/controller/cartController.dart';
 import 'package:iccycream/screens/getStarted.dart';
 
 void main() async {
@@ -20,6 +21,7 @@ void main() async {
 void initializingControllers() {
   Get.put(AuthController());
   Get.put(IceCreamController());
+  Get.put(CartController());
 }
 
 class MyApp extends StatelessWidget {
