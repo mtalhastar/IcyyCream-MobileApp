@@ -45,10 +45,11 @@ class _CartScreenState extends State<CartScreen> {
                   key: Key(CartController
                       .instance.shoppingcart[index].iceCream.id
                       .toString()),
-                  onDismissed: (direction) => CartController.instance
-                      .removeFromCart(CartController
-                          .instance.shoppingcart[index].iceCream.id
-                          .toString()),
+                  onDismissed: (direction) {
+                    CartController.instance.removeFromCart(CartController
+                        .instance.shoppingcart[index].iceCream.id
+                        .toString());
+                  },
                   child: Card(
                     elevation: 0.4,
                     child: CardItem(
@@ -79,8 +80,7 @@ class _CartScreenState extends State<CartScreen> {
         child: Container(
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(5),
-          child: GetBuilder<CartController>(
-            builder: (context) {
+          child: GetBuilder<CartController>(builder: (context) {
             return Column(
               children: [
                 const SizedBox(
@@ -98,8 +98,8 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 Row(
                   children: [
-                    Text('Price'),
-                    Spacer(),
+                    const Text('Price'),
+                    const Spacer(),
                     Text('${CartController.instance.CalcuatingPrice()}\$')
                   ],
                 ),

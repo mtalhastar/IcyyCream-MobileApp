@@ -24,6 +24,7 @@ class CartController extends GetxController {
         shoppingcart.remove(shoppingcart[i]);
       }
     }
+    update();
   }
 
   void changeQuantity(String itemId, int quantity) {
@@ -55,7 +56,8 @@ class CartController extends GetxController {
   double CalcuatingPrice() {
     double price = 0;
     for (int i = 0; i < shoppingcart.length; i++) {
-      price = price + int.parse(shoppingcart[i].iceCream.price!)*shoppingcart[i].quantity;
+      price = price +
+          int.parse(shoppingcart[i].iceCream.price!) * shoppingcart[i].quantity;
     }
     return price;
   }

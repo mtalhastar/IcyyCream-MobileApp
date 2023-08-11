@@ -21,6 +21,7 @@ class CardItem extends StatelessWidget {
           Image.network(
             item.iceCream.imageUrl!,
             height: 100,
+            width: 100,
           ),
           const SizedBox(
             width: 20,
@@ -57,7 +58,7 @@ class CardItem extends StatelessWidget {
                   width: double.maxFinite,
                   child: Text(
                     '${item.iceCream.price!}\$',
-                    style: const TextStyle(
+                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontFamily: 'Jaldi',
