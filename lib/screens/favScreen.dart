@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iccycream/models/icecream.dart';
 import 'package:iccycream/widgets/bottomnavbar.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
@@ -44,12 +45,7 @@ class _FavScreenState extends State<FavScreen> {
               child: InkWell(
                 onTap: () {
                   Get.to(
-                      AddToCartScreen(
-                        imageUrl: 'assets/images/zombie2.png',
-                        price: '',
-                        longDescription: '',
-                        shortDescription: '',
-                      ),
+                      AddToCartScreen(item: IceCream(),),
                       transition: Transition.downToUp,
                       duration: const Duration(seconds: 1));
                 },

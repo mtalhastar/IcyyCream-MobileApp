@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
-
+import 'package:iccycream/models/icecream.dart';
+import 'package:iccycream/controller/cartController.dart';
 class AddToCartScreen extends StatelessWidget {
   NavController c = Get.find();
-  AddToCartScreen(
-      {super.key,
-      required this.imageUrl,
-      required this.price,
-      required this.longDescription,
-      required this.shortDescription});
+  AddToCartScreen({super.key, required this.item});
 
-  final String imageUrl;
-  final String price;
-  final String longDescription;
-  final String shortDescription;
+  final IceCream item;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +15,8 @@ class AddToCartScreen extends StatelessWidget {
         body: Stack(
       children: [
         Container(width: double.infinity, color: Colors.white),
-        Positioned(top: 0, left: 0, right: 0, child: Image.network(imageUrl)),
+        Positioned(
+            top: 0, left: 0, right: 0, child: Image.network(item.imageUrl!)),
         Positioned(
           bottom: 0,
           left: 0,
@@ -41,7 +35,7 @@ class AddToCartScreen extends StatelessWidget {
                     width: 361,
                     height: 53,
                     child: Text(
-                      shortDescription,
+                      item.shortDescription!,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -51,11 +45,11 @@ class AddToCartScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                       width: 361,
                       height: 66,
                       child: Text(
-                        '$price\$',
+                        '${item.price}\$',
                         style: const TextStyle(
                           color: Color(0xFFEEC605),
                           fontSize: 40,
@@ -67,11 +61,11 @@ class AddToCartScreen extends StatelessWidget {
                   Container(
                     width: double.maxFinite,
                     height: 150,
-                    child:  SingleChildScrollView(
+                    child: SingleChildScrollView(
                       child: Text(
-                         longDescription,
+                        item.longDescription!,
                         textAlign: TextAlign.justify,
-                        style:const TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontFamily: 'Jaldi',
@@ -84,21 +78,24 @@ class AddToCartScreen extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 378,
-                    height: 60,
-                    decoration: ShapeDecoration(
-                      color: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  InkWell(
+                    onTap:()=>CartController.instance.addToCart(item, 1),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 378,
+                      height: 60,
+                      decoration: ShapeDecoration(
+                        color: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Add to Cart',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                      child: const Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   )

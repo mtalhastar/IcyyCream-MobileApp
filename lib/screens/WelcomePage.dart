@@ -194,16 +194,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           .length, // Replace this with the actual number of grid items you want
                       itemBuilder: (context, index) {
                         return CardWidget(
-                          name: IceCreamController
-                              .instance.filteredIceCreams[index].name,
-                          description: IceCreamController.instance
-                              .filteredIceCreams[index].shortDescription,
-                          longDescription: IceCreamController.instance
-                              .filteredIceCreams[index].longDescription,
-                          price: IceCreamController
-                              .instance.filteredIceCreams[index].price,
-                          imageUrl: IceCreamController
-                              .instance.filteredIceCreams[index].imageUrl,
+                        icecream: IceCreamController.instance.filteredIceCreams[index],
                         );
                       },
                     ),

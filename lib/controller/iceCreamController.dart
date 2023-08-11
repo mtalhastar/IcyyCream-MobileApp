@@ -55,7 +55,7 @@ class IceCreamController extends GetxController {
   }
 
   void SearchingIceCreams(String searchkey) {
-    filteredIceCreams = iceCreamsList.where((element) => element.name.toLowerCase().contains(searchkey.toLowerCase())).toList();
+    filteredIceCreams = iceCreamsList.where((element) => element.name!.toLowerCase().contains(searchkey.toLowerCase())).toList();
     update();
     print(filteredIceCreams.length);
   }

@@ -1,17 +1,20 @@
 class IceCream {
   const IceCream(
       {this.id,
-      required this.name,
-      required this.shortDescription,
-      required this.longDescription,
-      required this.imageUrl,
-      required this.price,
-      required this.category});
+       this.name,
+       this.shortDescription,
+       this.longDescription,
+      this.imageUrl,
+    this.price,
+      this.category});
   final String ?id;
-  final String name;
-  final String shortDescription;
-  final String longDescription;
-  final String price;
-  final String category;
-  final String imageUrl;
+  final String ?name;
+  final String ?shortDescription;
+  final String ?longDescription;
+  final String ?price;
+  final String ?category;
+  final String ?imageUrl;
+
+
+  
 }

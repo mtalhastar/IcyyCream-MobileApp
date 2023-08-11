@@ -1,6 +1,13 @@
 import 'package:iccycream/models/icecream.dart';
+
 class CartIceCream {
-  const CartIceCream({required this.iceCream, required this.quantity});
+
+  CartIceCream({required this.iceCream, required this.quantity});
   final IceCream iceCream;
-  final double quantity;
+  double quantity;
+
+  void setQuantity(double quantity) {
+    this.quantity = quantity;
+  }
+
 }
