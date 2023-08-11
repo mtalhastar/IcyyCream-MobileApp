@@ -29,7 +29,8 @@ class _FavScreenState extends State<FavScreen> {
                 Get.back();
                 c.index.value = 1;
               },
-              icon: const Icon(Icons.arrow_back_ios_new_outlined,color: Colors.black))),
+              icon: const Icon(Icons.arrow_back_ios_new_outlined,
+                  color: Colors.black))),
       body: Container(
         width: double.infinity,
         color: Colors.white,
@@ -42,7 +43,13 @@ class _FavScreenState extends State<FavScreen> {
               padding: EdgeInsets.all(5),
               child: InkWell(
                 onTap: () {
-                  Get.to(AddToCartScreen(imageUrl: 'assets/images/zombie2.png',price: '',longDescription: '',shortDescription: '', ),
+                  Get.to(
+                      AddToCartScreen(
+                        imageUrl: 'assets/images/zombie2.png',
+                        price: '',
+                        longDescription: '',
+                        shortDescription: '',
+                      ),
                       transition: Transition.downToUp,
                       duration: const Duration(seconds: 1));
                 },
@@ -107,8 +114,7 @@ class _FavScreenState extends State<FavScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavi() ,
-      
+      bottomNavigationBar: BottomNavi(),
     );
   }
 }

@@ -10,7 +10,7 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  List<String> newicecreamlist=[];
+  List<String> newicecreamlist = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -52,12 +52,15 @@ class _CategoryListState extends State<CategoryList> {
                 ),
               ),
               onTap: () => setState(() {
+                    IceCreamController.instance
+                        .filteringCategories('all tastes');
+
                     index = 1;
                   })),
           const SizedBox(
             width: 10,
           ),
-          for (var i = 0; i < newicecreamlist.length;i++)
+          for (var i = 0; i < newicecreamlist.length; i++)
             Row(
               children: [
                 InkWell(
@@ -66,7 +69,7 @@ class _CategoryListState extends State<CategoryList> {
                       width: 101,
                       height: 30,
                       decoration: ShapeDecoration(
-                        color: index == 2+i ? Colors.black : Colors.white,
+                        color: index == 2 + i ? Colors.black : Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -74,7 +77,7 @@ class _CategoryListState extends State<CategoryList> {
                       child: Text(
                         newicecreamlist[i],
                         style: TextStyle(
-                          color: index == 2+i ? Colors.white : Colors.black,
+                          color: index == 2 + i ? Colors.white : Colors.black,
                           fontSize: 14,
                           fontFamily: 'Jaldi',
                           fontWeight: FontWeight.w500,
@@ -83,7 +86,10 @@ class _CategoryListState extends State<CategoryList> {
                       ),
                     ),
                     onTap: () => setState(() {
-                          index = 2+i;
+                          IceCreamController.instance
+                              .filteringCategories(newicecreamlist[i]);
+                          
+                          index = 2 + i;
                         })),
                 const SizedBox(
                   width: 10,

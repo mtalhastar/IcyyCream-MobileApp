@@ -39,7 +39,7 @@ class AddToCartScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 361,
-                    height: 66,
+                    height: 53,
                     child: Text(
                       shortDescription,
                       style: const TextStyle(
