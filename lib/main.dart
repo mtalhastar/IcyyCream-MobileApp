@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iccycream/controller/favController.dart';
 import 'package:iccycream/screens/getStarted.dart';
 import 'package:iccycream/screens/AuthPage.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ void initializingControllers() {
   Get.put(AuthController());
   Get.put(IceCreamController());
   Get.put(CartController());
+  Get.put(FavController());
 }
 
 class MyApp extends StatelessWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
+import 'package:iccycream/controller/favController.dart';
 import 'package:iccycream/models/icecream.dart';
 import 'package:iccycream/controller/cartController.dart';
 class AddToCartScreen extends StatelessWidget {
@@ -125,10 +126,17 @@ class AddToCartScreen extends StatelessWidget {
                 )
               ],
             ),
-            child: const Icon(
-              Icons.favorite,
-              color: Colors.white,
-              size: 40,
+            child: InkWell(
+              onTap: ()=>{FavController.instance.addToFavCart(item)},
+              child: 
+              GetBuilder<FavController>(
+              builder:(controller) =>
+              Icon(
+                Icons.favorite,
+                color: FavController.instance.FindFavourite(item.id!)==true? const Color.fromARGB(255, 255, 0, 0): Color.fromARGB(255, 255, 255, 255),
+                size: 40,
+              ),
+              )
             ),
           ),
         ),
