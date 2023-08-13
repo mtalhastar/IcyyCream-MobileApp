@@ -37,11 +37,21 @@ class _CardWidgetState extends State<CardWidget> {
                     transition: Transition.downToUp,
                     duration: const Duration(seconds: 1));
               },
-              child: Image.network(
-                widget.icecream.imageUrl!,
+                child: Image.network(widget.icecream.imageUrl!,
                 height: 100,
-                width: 132,
-              ),
+                width: 132, 
+                loadingBuilder: (BuildContext context,
+                      Widget child, ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              }),
             )),
         Positioned(
           left: 5,

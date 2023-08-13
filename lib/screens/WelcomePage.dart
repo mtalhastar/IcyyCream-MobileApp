@@ -82,8 +82,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               height: 10,
                             ),
                             Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 20),
                                 width: double.maxFinite,
                                 child: Text(
                                   'Find your fav \nIce-creams',

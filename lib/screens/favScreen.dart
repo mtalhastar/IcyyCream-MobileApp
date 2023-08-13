@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
 import 'package:iccycream/screens/addToCart.dart';
 import 'package:iccycream/controller/favController.dart';
+
 class FavScreen extends StatefulWidget {
   const FavScreen({super.key});
 
@@ -37,81 +38,88 @@ class _FavScreenState extends State<FavScreen> {
           color: Colors.white,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: ListView.builder(
-            itemCount: FavController.instance.shoppingcart.length ,
-            itemBuilder: (context, index) {
-            return Container(
-              width: double.maxFinite,
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(5),
-              child: InkWell(
-                onTap: () {
-                  Get.to(
-                      AddToCartScreen(
-                        item:   FavController
-                                .instance.shoppingcart[index].iceCream,
-                      ),
-                      transition: Transition.downToUp,
-                      duration: const Duration(seconds: 1));
-                },
-                child: Row(
-                  children: [
-                    Image.network(
-                      FavController.instance.shoppingcart[index].iceCream.imageUrl!,
-                      height: 100,
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: Column(
+              itemCount: FavController.instance.shoppingcart.length,
+              itemBuilder: (context, index) {
+                return Dismissible(
+                  key: Key(FavController.instance.shoppingcart[index].iceCream.id!),
+                  onDismissed: (direction) =>  FavController.instance.removeFromFav(FavController.instance.shoppingcart[index].iceCream.id!) ,
+                  child: Container(
+                    width: double.maxFinite,
+                    margin: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(
+                            AddToCartScreen(
+                              item: FavController
+                                  .instance.shoppingcart[index].iceCream,
+                            ),
+                            transition: Transition.downToUp,
+                            duration: const Duration(seconds: 1));
+                      },
+                      child: Row(
                         children: [
-                          Container(
-                            width: double.maxFinite,
-                            child: Text(
-                              FavController.instance.shoppingcart[index].iceCream.name!,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'Jaldi',
-                                fontWeight: FontWeight.w400,
-                                letterSpacing: 0.40,
-                              ),
+                          Image.network(
+                            FavController.instance.shoppingcart[index].iceCream
+                                .imageUrl!,
+                            height: 100,
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: double.maxFinite,
+                                  child: Text(
+                                    FavController.instance.shoppingcart[index]
+                                        .iceCream.name!,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontFamily: 'Jaldi',
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: 0.40,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: double.maxFinite,
+                                  child: Text(
+                                    FavController.instance.shoppingcart[index]
+                                        .iceCream.shortDescription!,
+                                    style: const TextStyle(
+                                      color: Color(0xFF838383),
+                                      fontSize: 18,
+                                      fontFamily: 'Jaldi',
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: 0.36,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: double.maxFinite,
+                                  child: Text(
+                                    '${FavController.instance.shoppingcart[index].iceCream.price!}\$',
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontFamily: 'Jaldi',
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: 0.40,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
-                         SizedBox(
-                            width: double.maxFinite,
-                            child: Text(
-                               FavController.instance.shoppingcart[index].iceCream.shortDescription!,
-                              style: const TextStyle(
-                                color: Color(0xFF838383),
-                                fontSize: 18,
-                                fontFamily: 'Jaldi',
-                                fontWeight: FontWeight.w400,
-                                letterSpacing: 0.36,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            child: Text(
-                              '${FavController.instance.shoppingcart[index].iceCream.price!}\$',
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: 'Jaldi',
-                                fontWeight: FontWeight.w400,
-                                letterSpacing: 0.40,
-                              ),
-                            ),
-                          )
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            );
-          })),
+                  ),
+                );
+              })),
       bottomNavigationBar: BottomNavi(),
     );
   }
