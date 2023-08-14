@@ -5,7 +5,6 @@ import 'package:page_transition/page_transition.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
-
   @override
   State<StartScreen> createState() => _StartScreenState();
 }

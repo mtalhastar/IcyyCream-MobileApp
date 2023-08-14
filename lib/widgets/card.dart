@@ -2,18 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/screens/addToCart.dart';
-class CardWidget extends StatefulWidget {
-  const CardWidget(
-      {super.key,
-      required this.name,
-      required this.description,
-      required this.price,
-      required this.imageUrl});
+import 'package:iccycream/models/icecream.dart';
 
-  final String name;
-  final String imageUrl;
-  final String description;
-  final String price;
+class CardWidget extends StatefulWidget {
+  const CardWidget({super.key, required this.icecream});
+  final IceCream icecream;
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -25,34 +18,47 @@ class _CardWidgetState extends State<CardWidget> {
     return Stack(
       children: [
         // ignore: prefer_const_constructors
-        Column(children:  const [
+        Column(children: const [
           SizedBox(
             height: 240,
             width: 165,
           ),
         ]),
         Positioned(
-              left: 5,
-              right: 5,
-              top: 5,
-              child: InkWell(
-                 onTap: () {
-                  Get.to(AddToCartScreen(imageUrl: widget.imageUrl),
-                      transition: Transition.downToUp,
-                      duration: const Duration(seconds: 1));
-                },
-                child: Image.asset(
-                  widget.imageUrl,
-                  height: 150,
-                  width: 132,
-                ),
-              )),
+            left: 5,
+            right: 5,
+            top: 5,
+            child: InkWell(
+              onTap: () {
+                Get.to(
+                    AddToCartScreen(
+                      item: widget.icecream,
+                    ),
+                    transition: Transition.downToUp,
+                    duration: const Duration(seconds: 1));
+              },
+                child: Image.network(widget.icecream.imageUrl!,
+                height: 100,
+                width: 132, 
+                loadingBuilder: (BuildContext context,
+                      Widget child, ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              }),
+            )),
         Positioned(
           left: 5,
           right: 5,
-          bottom: 55,
+          bottom: 70,
           child: Text(
-            widget.name,
+            widget.icecream.name!,
             textAlign: TextAlign.left,
             style: GoogleFonts.jaldi(
               textStyle: const TextStyle(
@@ -66,9 +72,9 @@ class _CardWidgetState extends State<CardWidget> {
         Positioned(
           left: 5,
           right: 5,
-          bottom: 35,
+          bottom: 50,
           child: Text(
-            widget.description,
+            widget.icecream.shortDescription!,
             textAlign: TextAlign.left,
             style: GoogleFonts.jaldi(
               textStyle: const TextStyle(
@@ -83,7 +89,7 @@ class _CardWidgetState extends State<CardWidget> {
           right: 5,
           bottom: 0,
           child: Text(
-            '\$${widget.price}',
+            '\$${widget.icecream.price}',
             textAlign: TextAlign.left,
             style: GoogleFonts.jaldi(
               textStyle: const TextStyle(

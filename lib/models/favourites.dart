@@ -1,7 +1,7 @@
 import 'package:iccycream/models/icecream.dart';
 
 class Favourite {
-  const Favourite({required this.userId, required this.iceCream});
+  Favourite({required this.iceCream, this.flag=false});
   final IceCream iceCream;
-  final String userId;
+  bool flag;
 }

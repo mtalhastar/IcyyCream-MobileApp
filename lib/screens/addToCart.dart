@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
-
+import 'package:iccycream/controller/favController.dart';
+import 'package:iccycream/models/icecream.dart';
+import 'package:iccycream/controller/cartController.dart';
 class AddToCartScreen extends StatelessWidget {
   NavController c = Get.find();
-  AddToCartScreen({super.key, required this.imageUrl});
-  final String imageUrl;
+  AddToCartScreen({super.key, required this.item});
+
+  final IceCream item;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,8 @@ class AddToCartScreen extends StatelessWidget {
         body: Stack(
       children: [
         Container(width: double.infinity, color: Colors.white),
-        Positioned(top: 0, left: 0, right: 0, child: Image.asset(imageUrl)),
+        Positioned(
+            top: 0, left: 0, right: 0, child: Image.network(item.imageUrl!)),
         Positioned(
           bottom: 0,
           left: 0,
@@ -28,12 +32,12 @@ class AddToCartScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 361,
-                    height: 66,
+                    height: 53,
                     child: Text(
-                      'IceCream - Zombie',
-                      style: TextStyle(
+                      item.shortDescription!,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 30,
                         fontFamily: 'Jaldi',
@@ -42,12 +46,12 @@ class AddToCartScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                       width: 361,
                       height: 66,
                       child: Text(
-                        '20\$',
-                        style: TextStyle(
+                        '${item.price}\$',
+                        style: const TextStyle(
                           color: Color(0xFFEEC605),
                           fontSize: 40,
                           fontFamily: 'Jaldi',
@@ -58,13 +62,11 @@ class AddToCartScreen extends StatelessWidget {
                   Container(
                     width: double.maxFinite,
                     height: 150,
-                    child: const SingleChildScrollView(
+                    child: SingleChildScrollView(
                       child: Text(
-                        'At first glance, the appearance is deceivingly innocuous—a scoop of ice cream, seemingly like any other, nestled in a frosty, pitch-black waffle cone.'
-                        'But beware for it'
-                        's not just any frozen treat that beckons to you its a sinister concoction that defies the boundaries of the culinary realm.',
+                        item.longDescription!,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                           fontFamily: 'Jaldi',
@@ -77,21 +79,24 @@ class AddToCartScreen extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 378,
-                    height: 60,
-                    decoration: ShapeDecoration(
-                      color: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  InkWell(
+                    onTap:()=>CartController.instance.addToCart(item, 1),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 378,
+                      height: 60,
+                      decoration: ShapeDecoration(
+                        color: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Add to Cart',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                      child: const Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   )
@@ -121,10 +126,17 @@ class AddToCartScreen extends StatelessWidget {
                 )
               ],
             ),
-            child: const Icon(
-              Icons.favorite,
-              color: Colors.white,
-              size: 40,
+            child: InkWell(
+              onTap: ()=>{FavController.instance.addToFavCart(item)},
+              child: 
+              GetBuilder<FavController>(
+              builder:(controller) =>
+              Icon(
+                Icons.favorite,
+                color: FavController.instance.FindFavourite(item.id!)==true? const Color.fromARGB(255, 255, 0, 0): Color.fromARGB(255, 255, 255, 255),
+                size: 40,
+              ),
+              )
             ),
           ),
         ),
