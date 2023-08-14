@@ -61,4 +61,8 @@ class CartController extends GetxController {
     }
     return price;
   }
+
+  void EmptyTheCart() {
+    shoppingcart = [];
+  }
 }

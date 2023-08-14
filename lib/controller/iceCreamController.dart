@@ -77,4 +77,5 @@ class IceCreamController extends GetxController {
       print('Error adding user to Firestore: $error');
     }
   }
+ 
 }

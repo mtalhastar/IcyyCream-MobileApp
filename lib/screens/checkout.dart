@@ -19,6 +19,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   TextEditingController city = TextEditingController();
   TextEditingController postalAddress = TextEditingController();
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    shippingAddress.dispose();
+    phone.dispose();
+    city.dispose();
+    postalAddress.dispose();
+  }
+
   void makeOrder() {
     if (shippingAddress.value.text.trim().isEmpty) {
       Get.snackbar('Invalid Input', 'Shipping address is empty',
@@ -28,8 +38,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
     if (phone.value.text.trim().isEmpty) {
       Get.snackbar('Invalid Input', 'Phone is empty',
-        duration: const Duration(seconds: 2),
-        snackPosition: SnackPosition.BOTTOM);
+          duration: const Duration(seconds: 2),
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
     if (city.value.text.trim().isEmpty) {
@@ -46,16 +56,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     }
     final shoppingList = CartController.instance.shoppingcart;
 
-    if(shoppingList.length==0){
-        Get.snackbar('Cart Is Empty', 'Add some things to cart to proceed',
+    if (shoppingList.length == 0) {
+      Get.snackbar('Cart Is Empty', 'Add some things to cart to proceed',
           duration: const Duration(seconds: 2),
           snackPosition: SnackPosition.BOTTOM);
     }
 
-    final price =  CartController.instance.CalcuatingPrice();
+    final price = CartController.instance.CalcuatingPrice();
     final authenticationUid = AuthController.instance.users.uid;
-    OrderController.instance.addOrders(authenticationUid.toString(), postalAddress.value.text, phone.value.text,price.toString(), city.value.text,'In-Progress', shippingAddress.value.text, shoppingList);
 
+    OrderController.instance.addOrders(
+      authenticationUid.toString(),
+      postalAddress.value.text,
+      phone.value.text,
+      price.toString(),
+      city.value.text,
+      'In-Progress',
+      shippingAddress.value.text,
+    );
+    shippingAddress.clear();
+    phone.clear();
+    city.clear();
+    postalAddress.clear();
+
+    Get.off(context, transition: Transition.downToUp);
   }
 
   NavController c = Get.find();
@@ -69,7 +93,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             'Checkout',
             style: TextStyle(fontSize: 18, color: Colors.black),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           leading: IconButton(
               onPressed: () {
                 Get.back();
@@ -81,7 +105,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         physics: const BouncingScrollPhysics(),
         child: Container(
             width: double.infinity,
-            color: Colors.white,
+            height: 1000,
+            color: const Color.fromARGB(255, 255, 255, 255),
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
@@ -143,7 +168,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     controller: phone,
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
-                      hintText: 'Enter Phone Address',
+                      hintText: 'Enter Phone Number',
                       hintStyle: TextStyle(
                         color: Color.fromARGB(255, 138, 138, 138),
                       ),
@@ -196,7 +221,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 1,
                         blurRadius: 1,
-                        offset: const Offset(0, 0), // changes the shadow position
+                        offset:
+                            const Offset(0, 0), // changes the shadow position
                       ),
                     ],
                     border: Border.all(
@@ -220,31 +246,34 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 const SizedBox(
                   height: 60,
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  width: double.maxFinite,
-                  height: 59,
-                  alignment: Alignment.center,
-                  decoration: ShapeDecoration(
-                    color: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                InkWell(
+                  onTap: makeOrder,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    width: double.maxFinite,
+                    height: 59,
+                    alignment: Alignment.center,
+                    decoration: ShapeDecoration(
+                      color: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x3F000000),
+                          blurRadius: 1,
+                          offset: Offset(0, 0),
+                          spreadRadius: 1,
+                        )
+                      ],
                     ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x3F000000),
-                        blurRadius: 1,
-                        offset: Offset(0, 0),
-                        spreadRadius: 1,
-                      )
-                    ],
-                  ),
-                  child: const Text(
-                    'Cash on Delivery',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20),
+                    child: const Text(
+                      'Cash on Delivery',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20),
+                    ),
                   ),
                 ),
                 const SizedBox(

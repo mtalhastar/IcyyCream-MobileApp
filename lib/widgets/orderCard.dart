@@ -1,78 +1,74 @@
 import 'package:flutter/material.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
-
+  OrderCard(
+      {super.key,
+      required this.orderId,
+      required this.postalCode,
+      required this.status,
+      required this.homeaddress,
+      required this.price});
+  String orderId;
+  String postalCode;
+  String status;
+  String homeaddress;
+  String price;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
+      margin: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 253, 253, 253),
+        color: Color.fromARGB(255, 44, 44, 44),
         borderRadius: BorderRadius.all(Radius.circular(10)), // Rounded corners
 
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(255, 126, 126, 126),
+            color: Color.fromARGB(255, 255, 254, 254),
             // Shadow color
-            blurRadius: 1,
+            blurRadius: 5,
             offset: Offset(0, 0), // Shadow offset
           ),
         ],
       ),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'IceCream-Zombie',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              orderId,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.white),
             ),
-            SizedBox(
+         const SizedBox(
               height: 5,
             ),
             Text(
-              'Vanilla - Strawberry',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              '${price}\$',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,
+                  color: Colors.white),
             ),
-            SizedBox(
+           const SizedBox(
               height: 5,
             ),
             Text(
-              '20\$ x 2',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            homeaddress,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+                  color: Colors.white),
             ),
-            SizedBox(
+          const  SizedBox(
               height: 5,
             ),
-            Text(
-              'House Address:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-            Text('727-F Block, K Society , Karachi'),
-            SizedBox(
-              height: 5,
-            ),
-            Text('Sub-Total: 400\$',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Text('To Be Delivered',
-                    style: TextStyle(
+      
+                Text(status,
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.yellow)),
-                Spacer(),
-                Text(
-                  'abfd141412fdfdf',
-                  style: TextStyle(color: Colors.red),
-                )
-              ],
-            )
+                        color: Colors.yellow,
+                   )),
+              
+              
+            
           ],
         ),
       ),

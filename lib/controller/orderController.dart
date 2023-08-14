@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:iccycream/controller/authController.dart';
+import 'package:iccycream/controller/cartController.dart';
+import 'package:iccycream/controller/iceCreamController.dart';
 import 'package:iccycream/models/order.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iccycream/models/cart.dart';
@@ -12,11 +15,11 @@ class OrderController extends GetxController {
   @override
   void onInit() {
     collectionReference = firestore.collection('orders');
-    iceCreamsList.bindStream(GetIceList());
+    iceCreamsList.bindStream(GetOrders());
     super.onInit();
   }
 
-  Stream<List<Orders>> GetIceList() {
+  Stream<List<Orders>> GetOrders() {
     Stream<QuerySnapshot> stream = collectionReference.snapshots();
     return stream.map((qShot) => qShot.docs
         .map((doc) => Orders(
@@ -27,9 +30,13 @@ class OrderController extends GetxController {
             city: doc['city'],
             status: doc['status'],
             homeaddress: doc['homeaddress'],
-            shoppingCart: doc['shoppingCart'],
             price: doc['price']))
         .toList());
+  }
+
+  List<Orders> GetOrdersByUid() {
+    final uid=AuthController.instance.users.uid;
+    return iceCreamsList.where((icecream) => icecream.userId.toString() == uid).toList();
   }
 
   void assignOrders(Orders item) {
@@ -42,27 +49,22 @@ class OrderController extends GetxController {
     update();
   }
 
-  void addOrders(
-      String uid,
-      String postalCode,
-      String phone,
-      String price,
-      String city,
-      String status,
-      String homeaddress,
-      List<CartIceCream> shoppingCart) async {
+  void addOrders(String uid, String postalCode, String phone, String price,
+      String city, String status, String homeaddress) async {
     try {
       CollectionReference ordersCollection = firestore.collection('orders');
-      await ordersCollection.add({
+      final collections = await ordersCollection.add({
         'userId': uid,
         'postalCode': postalCode,
         'phone': phone,
         'city': city,
         'price': price,
         'status': status,
-        'shoppingCart': shoppingCart,
         'homeaddress': homeaddress
       });
+      CartController.instance.EmptyTheCart();
+      Get.snackbar('Order Created:', 'Order created successfully',
+          snackPosition: SnackPosition.BOTTOM);
     } catch (error) {
       Get.snackbar('Progress Failed', 'Please try again',
           snackPosition: SnackPosition.BOTTOM);
