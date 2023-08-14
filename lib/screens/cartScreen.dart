@@ -4,6 +4,7 @@ import 'package:iccycream/widgets/bottomnavbar.dart';
 import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
 import 'package:iccycream/widgets/cartItem.dart';
+import 'package:iccycream/screens/checkout.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -132,8 +133,13 @@ class _CartScreenState extends State<CartScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text('Proceed',
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(const CheckoutScreen());
+                    },
+                    child: const Text('Proceed',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                  ),
                 )
               ],
             );

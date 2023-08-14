@@ -8,7 +8,8 @@ class FavController extends GetxController {
   List<Favourite> shoppingcart = [];
 
   void addToFavCart(IceCream item) {
-    int index = shoppingcart.indexWhere((cartItem) => cartItem.iceCream.id == item.id);
+    int index =
+        shoppingcart.indexWhere((cartItem) => cartItem.iceCream.id == item.id);
     if (index != -1) {
     } else {
       shoppingcart.add(Favourite(iceCream: item, flag: true));
