@@ -247,7 +247,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   height: 60,
                 ),
                 InkWell(
-                  onTap: makeOrder,
+                  onTap: () {
+                    makeOrder();
+                    Get.off(context);
+                  },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     width: double.maxFinite,

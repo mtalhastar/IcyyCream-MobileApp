@@ -16,6 +16,7 @@ class OrderController extends GetxController {
   void onInit() {
     collectionReference = firestore.collection('orders');
     iceCreamsList.bindStream(GetOrders());
+    ever(iceCreamsList, (callback) => GetOrders());
     super.onInit();
   }
 
@@ -35,8 +36,9 @@ class OrderController extends GetxController {
   }
 
   List<Orders> GetOrdersByUid() {
-    final uid=AuthController.instance.users.uid;
-    return iceCreamsList.where((icecream) => icecream.userId.toString() == uid).toList();
+    final uid = AuthController.instance.users.uid;
+    return iceCreamsList.where((icecream) => icecream.userId.toString() == uid)
+    .toList();
   }
 
   void assignOrders(Orders item) {

@@ -13,9 +13,10 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   NavController c = Get.find();
-  final ordersList = OrderController.instance.GetOrdersByUid();
+ 
   @override
   Widget build(BuildContext context) {
+     final ordersList = OrderController.instance.GetOrdersByUid();
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,

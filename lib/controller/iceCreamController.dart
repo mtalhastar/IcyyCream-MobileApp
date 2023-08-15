@@ -17,6 +17,7 @@ class IceCreamController extends GetxController {
     collectionReference = firestore.collection('icecreams');
     iceCreamsList.bindStream(GetIceList());
     filteredIceCreams = iceCreamsList;
+    ever(iceCreamsList, (callback) => GetIceList());
     super.onInit();
   }
 
@@ -55,10 +56,14 @@ class IceCreamController extends GetxController {
   }
 
   void SearchingIceCreams(String searchkey) {
-    filteredIceCreams = iceCreamsList.where((element) => element.name!.toLowerCase().contains(searchkey.toLowerCase())).toList();
+    filteredIceCreams = iceCreamsList
+        .where((element) =>
+            element.name!.toLowerCase().contains(searchkey.toLowerCase()))
+        .toList();
     update();
     print(filteredIceCreams.length);
   }
+
   void addIceCream(String uid, String name, String description, String price,
       String imageUrl, String longDescription, String catergory) async {
     try {
@@ -77,5 +82,4 @@ class IceCreamController extends GetxController {
       print('Error adding user to Firestore: $error');
     }
   }
- 
 }

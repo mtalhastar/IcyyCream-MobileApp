@@ -12,6 +12,7 @@ import 'package:iccycream/controller/authController.dart';
 import 'package:iccycream/controller/iceCreamController.dart';
 import 'package:iccycream/controller/cartController.dart';
 import 'package:iccycream/screens/getStarted.dart';
+import 'package:iccycream/controller/bottomNavController.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ void main() async {
 
 void initializingControllers() {
   Get.put(AuthController());
+  Get.put(NavController());
   Get.put(IceCreamController());
   Get.put(CartController());
   Get.put(FavController());
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(home: StartScreen());
+    return const GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: StartScreen());
   }
 }
