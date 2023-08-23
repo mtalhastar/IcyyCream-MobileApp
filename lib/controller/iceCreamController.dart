@@ -10,7 +10,7 @@ class IceCreamController extends GetxController {
   RxList<IceCream> iceCreamsList = RxList<IceCream>([]);
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference collectionReference;
-  List<IceCream> filteredIceCreams = [];
+  late List<IceCream> filteredIceCreams;
 
   @override
   void onInit() {

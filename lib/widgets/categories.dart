@@ -10,13 +10,13 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  List<String> newicecreamlist = [];
+  late List<String> newicecreamlist;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     newicecreamlist = IceCreamController.instance.GetIceCreamCategories();
-    IceCreamController.instance.filteringCategories('all tastes');
+    
   }
 
   int index = 1;
