@@ -13,14 +13,16 @@ import 'package:iccycream/controller/authController.dart';
 import 'package:iccycream/models/user.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  
   const WelcomeScreen({super.key, this.user});
+  
   final Users? user;
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
+  
   @override
   Widget build(BuildContext context) {
     

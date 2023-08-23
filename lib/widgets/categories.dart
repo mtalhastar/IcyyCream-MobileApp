@@ -16,6 +16,7 @@ class _CategoryListState extends State<CategoryList> {
     // TODO: implement initState
     super.initState();
     newicecreamlist = IceCreamController.instance.GetIceCreamCategories();
+    IceCreamController.instance.filteringCategories('all tastes');
   }
 
   int index = 1;
@@ -54,7 +55,6 @@ class _CategoryListState extends State<CategoryList> {
               onTap: () => setState(() {
                     IceCreamController.instance
                         .filteringCategories('all tastes');
-
                     index = 1;
                   })),
           const SizedBox(
@@ -88,7 +88,7 @@ class _CategoryListState extends State<CategoryList> {
                     onTap: () => setState(() {
                           IceCreamController.instance
                               .filteringCategories(newicecreamlist[i]);
-                          
+
                           index = 2 + i;
                         })),
                 const SizedBox(

@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
 import 'package:iccycream/screens/addToCart.dart';
 import 'package:iccycream/controller/favController.dart';
-
+import 'package:iccycream/controller/authController.dart';
+import 'package:iccycream/screens/WelcomePage.dart';
 class FavScreen extends StatefulWidget {
   const FavScreen({super.key});
 
@@ -28,7 +29,7 @@ class _FavScreenState extends State<FavScreen> {
           backgroundColor: Colors.white,
           leading: IconButton(
               onPressed: () {
-                Get.back();
+                
                 c.index.value = 1;
               },
               icon: const Icon(Icons.arrow_back_ios_new_outlined,
