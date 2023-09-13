@@ -7,6 +7,7 @@ import 'package:iccycream/screens/addToCart.dart';
 import 'package:iccycream/controller/favController.dart';
 import 'package:iccycream/controller/authController.dart';
 import 'package:iccycream/screens/WelcomePage.dart';
+
 class FavScreen extends StatefulWidget {
   const FavScreen({super.key});
 
@@ -29,7 +30,7 @@ class _FavScreenState extends State<FavScreen> {
           backgroundColor: Colors.white,
           leading: IconButton(
               onPressed: () {
-                
+                Get.off(const WelcomeScreen(), transition: Transition.fade);
                 c.index.value = 1;
               },
               icon: const Icon(Icons.arrow_back_ios_new_outlined,
@@ -42,8 +43,11 @@ class _FavScreenState extends State<FavScreen> {
               itemCount: FavController.instance.shoppingcart.length,
               itemBuilder: (context, index) {
                 return Dismissible(
-                  key: Key(FavController.instance.shoppingcart[index].iceCream.id!),
-                  onDismissed: (direction) =>  FavController.instance.removeFromFav(FavController.instance.shoppingcart[index].iceCream.id!) ,
+                  key: Key(
+                      FavController.instance.shoppingcart[index].iceCream.id!),
+                  onDismissed: (direction) => FavController.instance
+                      .removeFromFav(FavController
+                          .instance.shoppingcart[index].iceCream.id!),
                   child: Container(
                     width: double.maxFinite,
                     margin: const EdgeInsets.all(5),

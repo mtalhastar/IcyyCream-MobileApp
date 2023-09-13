@@ -1,44 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:iccycream/controller/favController.dart';
-import 'package:iccycream/controller/orderController.dart';
 import 'package:iccycream/screens/getStarted.dart';
-import 'package:iccycream/screens/AuthPage.dart';
 import 'package:get/get.dart';
-import 'package:iccycream/screens/WelcomePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iccycream/firebase_options.dart';
-import 'package:iccycream/controller/authController.dart';
-import 'package:iccycream/controller/iceCreamController.dart';
-import 'package:iccycream/controller/cartController.dart';
-import 'package:iccycream/screens/getStarted.dart';
-import 'package:iccycream/controller/bottomNavController.dart';
-import 'package:iccycream/controller/categories.dart';
+import 'package:iccycream/store/storeBinding.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-      .then((value) => initializingControllers());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
-
-void initializingControllers() {
-  Get.put(AuthController());
-  Get.put(NavController());
-  Get.put(CategoriesController());
-  Get.put(IceCreamController());
-  Get.put(CartController());
-  Get.put(FavController());
-  Get.put(OrderController());
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-        debugShowCheckedModeBanner: false, home: StartScreen());
+    return  GetMaterialApp(
+        debugShowCheckedModeBanner: false, home: const StartScreen(),
+        initialBinding:StoreBinding() );
   }
 }

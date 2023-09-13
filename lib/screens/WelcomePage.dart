@@ -13,19 +13,16 @@ import 'package:iccycream/controller/authController.dart';
 import 'package:iccycream/models/user.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  
   const WelcomeScreen({super.key, this.user});
-  
+
   final Users? user;
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         body: SizedBox(
           width: double.maxFinite,
@@ -60,24 +57,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     textStyle: const TextStyle(fontSize: 40.0),
                                   ),
                                 ),
-                                SizedBox(
+                               const SizedBox(
                                   width: 5,
-                                ),
-                                Text(
-                                  widget.user != null
-                                      ? widget.user!.username
-                                          .toString()
-                                          .split(" ")
-                                          .first
-                                      : 'Loading...',
-                                  textAlign: TextAlign.left,
-                                  style: GoogleFonts.jaldi(
-                                    textStyle: const TextStyle(
-                                        fontSize: 25.0,
-                                        fontFamily: 'Jaldi',
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 2),
-                                  ),
                                 ),
                               ]),
                             ),
