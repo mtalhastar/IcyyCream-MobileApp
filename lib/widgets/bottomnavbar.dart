@@ -47,7 +47,7 @@ class BottomNavi extends StatelessWidget {
               child: InkWell(
                   onTap: () {
                     controller.setIndex((2));
-                    Get.to(const CartScreen());
+                    Get.off(const CartScreen());
                   },
                   child: Obx(
                     () => Icon(
@@ -62,7 +62,7 @@ class BottomNavi extends StatelessWidget {
               child: InkWell(
                   onTap: () {
                     controller.setIndex((3));
-                    Get.to(FavScreen(),
+                    Get.off(FavScreen(),
                         transition: Transition.fadeIn,
                         duration: const Duration(milliseconds: 700));
                   },
@@ -79,7 +79,7 @@ class BottomNavi extends StatelessWidget {
             child: InkWell(
                 onTap: () {
                   controller.setIndex((4));
-                  Get.to(OrderScreen());
+                  Get.off(OrderScreen());
                 },
                 child: Obx(
                   () => Icon(

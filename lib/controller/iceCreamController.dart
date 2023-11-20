@@ -10,13 +10,15 @@ class IceCreamController extends GetxController {
   RxList<IceCream> iceCreamsList = RxList<IceCream>([]);
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference collectionReference;
-  List<IceCream> filteredIceCreams = [];
+  List<IceCream> filteredIceCreams=[];
 
   @override
   void onInit() {
     collectionReference = firestore.collection('icecreams');
     iceCreamsList.bindStream(GetIceList());
+    ever(iceCreamsList, (callback) {if (iceCreamsList.isNotEmpty) {
     filteredIceCreams = iceCreamsList;
+  }});
     super.onInit();
   }
 
@@ -37,8 +39,12 @@ class IceCreamController extends GetxController {
   List<String> GetIceCreamCategories() {
     final list =
         iceCreamsList.map((element) => element.category.toString()).toList();
-    print(list);
     return list;
+  }
+
+  Future<void> initializingLists() async{
+      
+      filteredIceCreams = iceCreamsList;
   }
 
   void filteringCategories(String key) {
@@ -55,10 +61,14 @@ class IceCreamController extends GetxController {
   }
 
   void SearchingIceCreams(String searchkey) {
-    filteredIceCreams = iceCreamsList.where((element) => element.name!.toLowerCase().contains(searchkey.toLowerCase())).toList();
+    filteredIceCreams = iceCreamsList
+        .where((element) =>
+            element.name!.toLowerCase().contains(searchkey.toLowerCase()))
+        .toList();
     update();
     print(filteredIceCreams.length);
   }
+
   void addIceCream(String uid, String name, String description, String price,
       String imageUrl, String longDescription, String catergory) async {
     try {
@@ -77,5 +87,4 @@ class IceCreamController extends GetxController {
       print('Error adding user to Firestore: $error');
     }
   }
- 
 }

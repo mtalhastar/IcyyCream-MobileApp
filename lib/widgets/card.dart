@@ -30,7 +30,7 @@ class _CardWidgetState extends State<CardWidget> {
             top: 5,
             child: InkWell(
               onTap: () {
-                Get.to(
+                Get.off(
                     AddToCartScreen(
                       item: widget.icecream,
                     ),

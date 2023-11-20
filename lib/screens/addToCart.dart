@@ -4,6 +4,7 @@ import 'package:iccycream/controller/bottomNavController.dart';
 import 'package:iccycream/controller/favController.dart';
 import 'package:iccycream/models/icecream.dart';
 import 'package:iccycream/controller/cartController.dart';
+import 'package:iccycream/screens/WelcomePage.dart';
 class AddToCartScreen extends StatelessWidget {
   NavController c = Get.find();
   AddToCartScreen({super.key, required this.item});
@@ -147,7 +148,7 @@ class AddToCartScreen extends StatelessWidget {
             onTap: () {
               c.setIndex(1);
               print(c.index.value);
-              Get.back();
+              Get.off(WelcomeScreen(),transition: Transition.fade);
             },
             child: Container(
               width: 44,

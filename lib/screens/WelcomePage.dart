@@ -14,6 +14,7 @@ import 'package:iccycream/models/user.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key, this.user});
+
   final Users? user;
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -21,8 +22,13 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    IceCreamController.instance.initializingLists();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Get.put(NavController());
     return Scaffold(
         body: SizedBox(
           width: double.maxFinite,
@@ -57,24 +63,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     textStyle: const TextStyle(fontSize: 40.0),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
-                                ),
-                                Text(
-                                  widget.user != null
-                                      ? widget.user!.username
-                                          .toString()
-                                          .split(" ")
-                                          .first
-                                      : 'Loading...',
-                                  textAlign: TextAlign.left,
-                                  style: GoogleFonts.jaldi(
-                                    textStyle: const TextStyle(
-                                        fontSize: 25.0,
-                                        fontFamily: 'Jaldi',
-                                        fontWeight: FontWeight.bold,
-                                        letterSpacing: 2),
-                                  ),
                                 ),
                               ]),
                             ),
@@ -82,7 +72,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               height: 10,
                             ),
                             Container(
-                                margin: const EdgeInsets.symmetric(horizontal: 20),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 width: double.maxFinite,
                                 child: Text(
                                   'Find your fav \nIce-creams',
@@ -134,16 +125,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       )
                     ],
                   ),
-                  child:  Row(
+                  child: Row(
                     children: [
-                     const  SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
-                     const  Icon(
+                      const Icon(
                         Icons.search,
                         color: Color.fromARGB(255, 138, 138, 138),
                       ),
-                    const   SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Expanded(
@@ -155,7 +146,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             ),
                             border: InputBorder.none,
                           ),
-                          onChanged: (value) => IceCreamController.instance.SearchingIceCreams(value) ,
+                          onChanged: (value) => IceCreamController.instance
+                              .SearchingIceCreams(value),
                         ),
                       ),
                     ],
@@ -173,9 +165,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                GetBuilder<IceCreamController>(
-                  
-                  builder: (context) {
+                GetBuilder<IceCreamController>(builder: (context) {
                   return Container(
                     height: 400,
                     margin:
@@ -193,7 +183,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           .length, // Replace this with the actual number of grid items you want
                       itemBuilder: (context, index) {
                         return CardWidget(
-                        icecream: IceCreamController.instance.filteredIceCreams[index],
+                          icecream: IceCreamController
+                              .instance.filteredIceCreams[index],
                         );
                       },
                     ),

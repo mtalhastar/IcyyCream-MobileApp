@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "362141200844-3r3e0q511u236ll9rqv538s7j2hg1gem.apps.googleusercontent.com",
+          "client_id": "362141200844-sehnu7fke68md7anba1sd232nhpp0eqb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.iccycream",
-            "certificate_hash": "5b5a3ced00eba033c25ec044d5a7ccc32fe114f0"
+            "certificate_hash": "742b1a1ef465857eed2855b83416d6b0c0c9fa59"
           }
         },
         {

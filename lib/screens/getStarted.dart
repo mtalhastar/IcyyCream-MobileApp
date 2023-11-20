@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iccycream/screens/AuthPage.dart';
 import 'package:get/get.dart';
+import 'package:iccycream/screens/WelcomePage.dart';
 import 'package:page_transition/page_transition.dart';
 
 class StartScreen extends StatefulWidget {
@@ -56,7 +57,7 @@ class _StartScreenState extends State<StartScreen> {
               height: 25,
             ),
             InkWell(
-              onTap: () => Get.off(const AuthenticationScreen(),
+              onTap: () => Get.off(const WelcomeScreen(),
                   transition: Transition.fade),
               child: Container(
                 width: 250,

@@ -31,8 +31,7 @@ class AuthController extends GetxController {
       print('Username is');
       print(user.displayName);
       Get.offAll(
-          WelcomeScreen(
-            user: users,
+          StartScreen(
           ),
           transition: Transition.fadeIn);
     }

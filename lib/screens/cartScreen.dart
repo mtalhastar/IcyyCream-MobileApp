@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:iccycream/controller/bottomNavController.dart';
 import 'package:iccycream/widgets/cartItem.dart';
 import 'package:iccycream/screens/checkout.dart';
+import 'package:iccycream/screens/WelcomePage.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -28,7 +29,7 @@ class _CartScreenState extends State<CartScreen> {
           backgroundColor: Colors.white,
           leading: IconButton(
               onPressed: () {
-                Get.back();
+                Get.off(WelcomeScreen(), transition: Transition.fade);
                 c.index.value = 1;
               },
               icon: const Icon(Icons.arrow_back_ios_new_outlined,
