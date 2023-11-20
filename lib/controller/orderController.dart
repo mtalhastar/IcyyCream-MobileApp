@@ -37,8 +37,9 @@ class OrderController extends GetxController {
 
   List<Orders> GetOrdersByUid() {
     final uid = AuthController.instance.users.uid;
-    return iceCreamsList.where((icecream) => icecream.userId.toString() == uid)
-    .toList();
+    return iceCreamsList
+        .where((icecream) => icecream.userId.toString() == uid)
+        .toList();
   }
 
   void assignOrders(Orders item) {

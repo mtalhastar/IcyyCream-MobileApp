@@ -22,6 +22,12 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    IceCreamController.instance.initializingLists();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SizedBox(
@@ -57,7 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     textStyle: const TextStyle(fontSize: 40.0),
                                   ),
                                 ),
-                               const SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                               ]),

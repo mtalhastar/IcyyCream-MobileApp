@@ -10,14 +10,15 @@ class IceCreamController extends GetxController {
   RxList<IceCream> iceCreamsList = RxList<IceCream>([]);
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference collectionReference;
-  late List<IceCream> filteredIceCreams;
+  List<IceCream> filteredIceCreams=[];
 
   @override
   void onInit() {
     collectionReference = firestore.collection('icecreams');
     iceCreamsList.bindStream(GetIceList());
+    ever(iceCreamsList, (callback) {if (iceCreamsList.isNotEmpty) {
     filteredIceCreams = iceCreamsList;
-    ever(iceCreamsList, (callback) => GetIceList());
+  }});
     super.onInit();
   }
 
@@ -38,8 +39,12 @@ class IceCreamController extends GetxController {
   List<String> GetIceCreamCategories() {
     final list =
         iceCreamsList.map((element) => element.category.toString()).toList();
-    print(list);
     return list;
+  }
+
+  Future<void> initializingLists() async{
+      
+      filteredIceCreams = iceCreamsList;
   }
 
   void filteringCategories(String key) {
