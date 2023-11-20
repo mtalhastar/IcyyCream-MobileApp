@@ -21,7 +21,6 @@ class OrderCard extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 44, 44, 44),
         borderRadius: BorderRadius.all(Radius.circular(10)), // Rounded corners
-
         boxShadow: [
           BoxShadow(
             color: Color.fromARGB(255, 255, 254, 254),
@@ -59,16 +58,12 @@ class OrderCard extends StatelessWidget {
           const  SizedBox(
               height: 5,
             ),
-      
                 Text(status,
                     style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: Colors.yellow,
                    )),
-              
-              
-            
           ],
         ),
       ),

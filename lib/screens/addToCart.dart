@@ -5,6 +5,8 @@ import 'package:iccycream/controller/favController.dart';
 import 'package:iccycream/models/icecream.dart';
 import 'package:iccycream/controller/cartController.dart';
 import 'package:iccycream/screens/WelcomePage.dart';
+import 'package:iccycream/screens/cartScreen.dart';
+
 class AddToCartScreen extends StatelessWidget {
   NavController c = Get.find();
   AddToCartScreen({super.key, required this.item});
@@ -81,7 +83,10 @@ class AddToCartScreen extends StatelessWidget {
                     height: 30,
                   ),
                   InkWell(
-                    onTap:()=>CartController.instance.addToCart(item, 1),
+                    onTap: () {
+                      CartController.instance.addToCart(item, 1);
+                      Get.off(const CartScreen());
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       width: 378,
@@ -128,17 +133,17 @@ class AddToCartScreen extends StatelessWidget {
               ],
             ),
             child: InkWell(
-              onTap: ()=>{FavController.instance.addToFavCart(item)},
-              child: 
-              GetBuilder<FavController>(
-              builder:(controller) =>
-              Icon(
-                Icons.favorite,
-                color: FavController.instance.FindFavourite(item.id!)==true? const Color.fromARGB(255, 255, 0, 0): Color.fromARGB(255, 255, 255, 255),
-                size: 40,
-              ),
-              )
-            ),
+                onTap: () => {FavController.instance.addToFavCart(item)},
+                child: GetBuilder<FavController>(
+                  builder: (controller) => Icon(
+                    Icons.favorite,
+                    color:
+                        FavController.instance.FindFavourite(item.id!) == true
+                            ? const Color.fromARGB(255, 255, 0, 0)
+                            : Color.fromARGB(255, 255, 255, 255),
+                    size: 40,
+                  ),
+                )),
           ),
         ),
         Positioned(
@@ -148,7 +153,7 @@ class AddToCartScreen extends StatelessWidget {
             onTap: () {
               c.setIndex(1);
               print(c.index.value);
-              Get.off(WelcomeScreen(),transition: Transition.fade);
+              Get.off(WelcomeScreen(), transition: Transition.fade);
             },
             child: Container(
               width: 44,
