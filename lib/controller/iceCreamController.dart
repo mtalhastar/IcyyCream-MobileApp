@@ -82,6 +82,7 @@ class IceCreamController extends GetxController {
         'imageUrl': imageUrl,
         'price': price,
         'category': catergory
+        
       });
     } catch (error) {
       print('Error adding user to Firestore: $error');

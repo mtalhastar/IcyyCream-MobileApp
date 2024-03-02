@@ -37,33 +37,40 @@ class OrderCard extends StatelessWidget {
           children: [
             Text(
               orderId,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,color: Colors.white),
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white),
             ),
-         const SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
               '${price}\$',
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
                   color: Colors.white),
             ),
-           const SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
-            homeaddress,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500,
+              homeaddress,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
                   color: Colors.white),
             ),
-          const  SizedBox(
+            const SizedBox(
               height: 5,
             ),
-                Text(status,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.yellow,
-                   )),
+            Text(status,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.yellow,
+                )),
           ],
         ),
       ),

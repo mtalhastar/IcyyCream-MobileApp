@@ -55,6 +55,12 @@ class OrderController extends GetxController {
   void addOrders(String uid, String postalCode, String phone, String price,
       String city, String status, String homeaddress) async {
     try {
+      String items = "";
+      final cartitems = CartController.instance.shoppingcart;
+      for (var item in cartitems) {
+        items = items+"${item.iceCream.name} X ${item.quantity} \n";
+      }
+
       CollectionReference ordersCollection = firestore.collection('orders');
       final collections = await ordersCollection.add({
         'userId': uid,
@@ -63,7 +69,8 @@ class OrderController extends GetxController {
         'city': city,
         'price': price,
         'status': status,
-        'homeaddress': homeaddress
+        'homeaddress': homeaddress,
+        'items': items
       });
       CartController.instance.EmptyTheCart();
       Get.snackbar('Order Created:', 'Order created successfully',
